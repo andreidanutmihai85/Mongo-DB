@@ -53,10 +53,12 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+
 
 // Set up socket.io
 const io = socket(server,{
