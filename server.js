@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const socket = require('socket.io');
+// const socket = require('socket.io');
 
 const config = require('./config/configs');
 
@@ -52,16 +52,20 @@ app.use((err, req, res, next) => {
   res.status(400).json({ err: err });
 });
 
-// Start the server
-const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+
+
+//==================================== Start the server
+// const port = process.env.PORT || 5000;
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
+
+// app.listen(port, () => {
+//   console.log(`Listening on port ${port}`);
+// });
 
 
 
