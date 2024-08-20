@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 10000;
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
@@ -85,3 +85,7 @@ io.on('connection', (socket) => {
     io.emit('visitor exits', online);
   });
 });
+
+app.listen(5000, ()=> {
+  console.log("server started on port 5000")
+})
