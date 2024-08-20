@@ -11,7 +11,7 @@ map.locate({setView: true, maxZoom: 16});
 // var circle = L.circle([44.39658924161665, 26.013907543181485], {
 
 
-
+OK
 
 
     
