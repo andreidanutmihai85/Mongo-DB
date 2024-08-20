@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-// const socket = require('socket.io');
+const socket = require('socket.io');
 
 const config = require('./config/configs');
 
@@ -57,44 +57,41 @@ app.use((err, req, res, next) => {
 
 
 //==================================== Start the server
-// const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-// app.listen(port, () => {
-//   console.log(`Listening on port ${port}`);
-// });
+const server = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 
 
 
 // Set up socket.io
-// const io = socket(server,{
-//   cors:{
-//     origin: config.react_app_url,
-//   }
-// });
-// let online = 0;
+const io = socket(server,{
+  cors:{
+    origin: config.react_app_url,
+  }
+});
+let online = 0;
 
-// io.on('connection', (socket) => {
-//   online++;
-//   console.log(`Socket ${socket.id} connected.`);
-//   console.log(`Online: ${online}`);
-//   io.emit('visitor enters', online);
+io.on('connection', (socket) => {
+  online++;
+  console.log(`Socket ${socket.id} connected.`);
+  console.log(`Online: ${online}`);
+  io.emit('visitor enters', online);
 
-//   socket.on('add', data => socket.broadcast.emit('add', data));
-//   socket.on('update', data => socket.broadcast.emit('update', data));
-//   socket.on('delete', data => socket.broadcast.emit('delete', data));
+  socket.on('add', data => socket.broadcast.emit('add', data));
+  socket.on('update', data => socket.broadcast.emit('update', data));
+  socket.on('delete', data => socket.broadcast.emit('delete', data));
 
-//   socket.on('disconnect', () => {
-//     online--;
-//     console.log(`Socket ${socket.id} disconnected.`);
-//     console.log(`Online: ${online}`);
-//     io.emit('visitor exits', online);
-//   });
-// });
+  socket.on('disconnect', () => {
+    online--;
+    console.log(`Socket ${socket.id} disconnected.`);
+    console.log(`Online: ${online}`);
+    io.emit('visitor exits', online);
+  });
+});
 
-// app.listen(5000, ()=> {
-//   console.log("server started on port 5000")
-// })
